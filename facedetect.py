@@ -37,7 +37,6 @@ while True:
 
     # Converting to the grayscale image
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
     faces = faceCascade.detectMultiScale(
         gray,
         scaleFactor=1.1,
@@ -47,9 +46,10 @@ while True:
         flags = 0
     )
 
-    # Draw a rectangle around the faces
+    # Draw a rectangle around the faces and put center in it
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        cv2.putText(frame, "." + str(((2*x+w)/2, (2*y+h)/2)), ((2*x+w)/2, (2*y+h)/2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 
     # Display the resulting frame
     cv2.imshow('Video', frame)
